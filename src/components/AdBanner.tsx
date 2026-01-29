@@ -17,7 +17,10 @@ const adContent = {
     cta: 'Stay Informed',
     icon: '🔥',
     image: null,
-    theme: 'from-orange-900/90 via-red-900/80 to-orange-950/90',
+    bgClass: 'bg-gradient-to-r from-orange-950 via-red-900 to-orange-950',
+    textClass: 'text-orange-100',
+    subtitleClass: 'text-orange-200/70',
+    ctaClass: 'text-orange-200 hover:text-white',
   },
   consulting: {
     title: 'Alaska Consulting Group',
@@ -25,7 +28,10 @@ const adContent = {
     cta: 'Learn More',
     icon: null,
     image: adConsulting,
-    theme: 'from-neutral-900/95 via-zinc-800/90 to-neutral-900/95',
+    bgClass: 'bg-gradient-to-r from-neutral-900 via-zinc-800 to-neutral-900',
+    textClass: 'text-zinc-100',
+    subtitleClass: 'text-zinc-400',
+    ctaClass: 'text-zinc-300 hover:text-white',
   },
   boats: {
     title: 'Alaskan Boats',
@@ -33,7 +39,10 @@ const adContent = {
     cta: 'Browse Listings',
     icon: '⛵',
     image: null,
-    theme: 'from-sky-900/90 via-blue-900/85 to-slate-900/90',
+    bgClass: 'bg-gradient-to-r from-sky-950 via-blue-900 to-sky-950',
+    textClass: 'text-sky-100',
+    subtitleClass: 'text-sky-200/70',
+    ctaClass: 'text-sky-200 hover:text-white',
   },
   chronicle: {
     title: 'The Anchorage Chronicle',
@@ -41,7 +50,10 @@ const adContent = {
     cta: 'Read Now',
     icon: null,
     image: adChronicle,
-    theme: 'from-stone-900/90 via-neutral-800/85 to-stone-900/90',
+    bgClass: 'bg-gradient-to-r from-stone-800 via-amber-950 to-stone-800',
+    textClass: 'text-stone-100',
+    subtitleClass: 'text-stone-300/80',
+    ctaClass: 'text-amber-200 hover:text-white',
   },
   gold: {
     title: 'Alaska Gold News',
@@ -49,7 +61,10 @@ const adContent = {
     cta: 'Explore',
     icon: null,
     image: adGoldNews,
-    theme: 'from-slate-900/95 via-zinc-900/90 to-slate-950/95',
+    bgClass: 'bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950',
+    textClass: 'text-amber-100',
+    subtitleClass: 'text-amber-200/70',
+    ctaClass: 'text-amber-300 hover:text-amber-100',
   },
   mining: {
     title: 'Alaska Mining Equipment',
@@ -57,7 +72,10 @@ const adContent = {
     cta: 'View Catalog',
     icon: null,
     image: adMining,
-    theme: 'from-zinc-900/95 via-neutral-800/90 to-zinc-900/95',
+    bgClass: 'bg-gradient-to-r from-zinc-900 via-neutral-800 to-zinc-900',
+    textClass: 'text-zinc-100',
+    subtitleClass: 'text-zinc-400',
+    ctaClass: 'text-zinc-300 hover:text-white',
   },
   listings: {
     title: 'Alaska Listings',
@@ -65,74 +83,52 @@ const adContent = {
     cta: 'List Now',
     icon: null,
     image: adListings,
-    theme: 'from-slate-900/95 via-zinc-800/90 to-slate-900/95',
+    bgClass: 'bg-gradient-to-r from-slate-900 via-cyan-950 to-slate-900',
+    textClass: 'text-cyan-100',
+    subtitleClass: 'text-cyan-200/70',
+    ctaClass: 'text-cyan-300 hover:text-white',
   },
 };
 
 const AdBanner = ({ variant, href }: AdBannerProps) => {
   const content = adContent[variant];
 
-  // For ads with background images
-  if (content.image) {
-    return (
-      <a
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="relative block w-full h-20 sm:h-24 overflow-hidden group"
-      >
-        {/* Background Image */}
-        <div className="absolute inset-0">
-          <img
-            src={content.image}
-            alt={content.title}
-            className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
-          />
-          <div className={`absolute inset-0 bg-gradient-to-r ${content.theme}`} />
-        </div>
-        
-        {/* Content */}
-        <div className="relative z-10 h-full flex items-center justify-between px-4 sm:px-8 container-news">
-          <div className="flex items-center gap-4 flex-1 min-w-0">
-            <div className="flex-1 min-w-0">
-              <h3 className="font-headline font-bold text-sm sm:text-base text-white truncate">
-                {content.title}
-              </h3>
-              <p className="hidden sm:block text-xs text-white/70 max-w-lg line-clamp-2">
-                {content.subtitle}
-              </p>
-            </div>
-          </div>
-          <span className="flex items-center gap-1.5 text-xs sm:text-sm font-medium text-white/90 group-hover:text-white transition-colors shrink-0 ml-4">
-            {content.cta}
-            <ExternalLink className="h-3.5 w-3.5" />
-          </span>
-        </div>
-      </a>
-    );
-  }
-
-  // For simple ads without background images (fires, boats)
   return (
     <a
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className={`relative block w-full h-14 sm:h-16 overflow-hidden group bg-gradient-to-r ${content.theme}`}
+      className={`block w-full ${content.bgClass} group transition-all duration-300 hover:brightness-110`}
     >
-      <div className="relative z-10 h-full flex items-center justify-between px-4 sm:px-8 container-news">
-        <div className="flex items-center gap-3 flex-1 min-w-0">
-          {content.icon && <span className="text-xl">{content.icon}</span>}
+      <div className="container-news h-16 sm:h-20 flex items-center justify-between gap-4 px-4 sm:px-6">
+        {/* Left side: Logo/Icon + Text */}
+        <div className="flex items-center gap-3 sm:gap-4 flex-1 min-w-0">
+          {/* Logo or Icon */}
+          {content.image ? (
+            <div className="shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-lg overflow-hidden bg-white/10 shadow-lg">
+              <img
+                src={content.image}
+                alt={content.title}
+                className="w-full h-full object-cover"
+              />
+            </div>
+          ) : content.icon ? (
+            <span className="text-2xl sm:text-3xl shrink-0">{content.icon}</span>
+          ) : null}
+          
+          {/* Text Content */}
           <div className="flex-1 min-w-0">
-            <h3 className="font-headline font-bold text-sm text-white truncate">
+            <h3 className={`font-headline font-bold text-sm sm:text-base ${content.textClass} truncate`}>
               {content.title}
             </h3>
-            <p className="hidden sm:block text-xs text-white/70 truncate">
+            <p className={`hidden sm:block text-xs ${content.subtitleClass} line-clamp-1 max-w-md`}>
               {content.subtitle}
             </p>
           </div>
         </div>
-        <span className="flex items-center gap-1.5 text-xs font-medium text-white/90 group-hover:text-white transition-colors shrink-0 ml-4">
+
+        {/* Right side: CTA */}
+        <span className={`flex items-center gap-1.5 text-xs sm:text-sm font-medium ${content.ctaClass} transition-colors shrink-0`}>
           {content.cta}
           <ExternalLink className="h-3.5 w-3.5" />
         </span>
