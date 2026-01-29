@@ -167,7 +167,9 @@ const LatestNews = () => {
                   )}
                   
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-1 text-xs text-muted-foreground">
+                    <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                      <span>Tongass News</span>
+                      <span>•</span>
                       <Clock className="h-3 w-3" />
                       <span>{formatDate(article.published_at)}</span>
                     </div>
