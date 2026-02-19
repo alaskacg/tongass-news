@@ -80,7 +80,7 @@ const adContent = {
   },
   listings: {
     title: 'Alaska Listings',
-    subtitle: 'FREE 60-day listings during beta!',
+    subtitle: 'FREE 60-day listings!',
     cta: 'List Now',
     icon: null,
     image: adListings,
